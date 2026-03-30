@@ -41,10 +41,37 @@ void testeBubleSort()
         printf("%d ", vetor[i]);
     }
     printf("\n");
+
+    free(vetor);
+}
+
+void testeInsertionSort()
+{
+    int *vetor = geraVetor(10);
+
+    printf("Algoritmo de ordenação Insertion Sort\n");
+    printf("Vetor desordenado\n");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d ", vetor[i]);
+    }
+
+    insertionSort(vetor, 10);
+
+    printf("\nVetor ordenado\n");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+    
+    free(vetor);
 }
 
 int main(int argc, char const *argv[])
 {
     testeBubleSort();
+    printf("\n\n");
+    testeInsertionSort();
     return 0;
 }
