@@ -37,10 +37,10 @@ void insertionSort(int *v, int n)
 void selectionSort(int *v, int n)
 {
     int minIndex, aux;
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n - 1; i++)
     {
         minIndex = i;
-        for (int j = i + 1; j < n; i++)
+        for (int j = i + 1; j < n; j++)
         {
             if (v[j] < v[minIndex])
             {
