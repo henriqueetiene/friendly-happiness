@@ -22,21 +22,21 @@ int *geraVetor(int n)
     return vetor;
 }
 
-void testeBubleSort()
+void testeBubleSort(int n)
 {
-    int *vetor = geraVetor(10);
+    int *vetor = geraVetor(n);
 
     printf("Algoritmo de ordenação Buble Sort\n");
     printf("Vetor desordenado\n");
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", vetor[i]);
     }
 
-    bubleSort(vetor, 10);
+    bubleSort(vetor, n);
 
     printf("\nVetor ordenado\n");
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", vetor[i]);
     }
@@ -45,21 +45,21 @@ void testeBubleSort()
     free(vetor);
 }
 
-void testeInsertionSort()
+void testeInsertionSort(int n)
 {
-    int *vetor = geraVetor(10);
+    int *vetor = geraVetor(n);
 
     printf("Algoritmo de ordenação Insertion Sort\n");
     printf("Vetor desordenado\n");
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", vetor[i]);
     }
 
-    insertionSort(vetor, 10);
+    insertionSort(vetor, n);
 
     printf("\nVetor ordenado\n");
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", vetor[i]);
     }
@@ -68,21 +68,21 @@ void testeInsertionSort()
     free(vetor);
 }
 
-void testeSelectionSort()
+void testeSelectionSort(int n)
 {
-    int *vetor = geraVetor(10);
+    int *vetor = geraVetor(n);
 
     printf("Algoritmo de ordenação Selection Sort\n");
     printf("Vetor desordenado\n");
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", vetor[i]);
     }
 
-    selectionSort(vetor, 10);
+    selectionSort(vetor, n);
 
     printf("\nVetor ordenado\n");
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < n; i++)
     {
         printf("%d ", vetor[i]);
     }
@@ -93,11 +93,11 @@ void testeSelectionSort()
 
 int main(int argc, char const *argv[])
 {
-    testeBubleSort();
+    testeBubleSort(10);
     printf("\n\n");
-    testeInsertionSort();
+    testeInsertionSort(10);
     printf("\n\n");
-    testeSelectionSort();
+    testeSelectionSort(10);
 
     return 0;
 }
