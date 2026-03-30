@@ -22,13 +22,29 @@ int *geraVetor(int n)
     return vetor;
 }
 
-int main(int argc, char const *argv[])
+void testeBubleSort()
 {
     int *vetor = geraVetor(10);
+
+    printf("Algoritmo de ordenação Buble Sort\n");
+    printf("Vetor desordenado\n");
     for (int i = 0; i < 10; i++)
     {
-        printf("%d\n", vetor[i]);
+        printf("%d ", vetor[i]);
     }
 
+    bubleSort(vetor, 10);
+
+    printf("\nVetor ordenado\n");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d ", vetor[i]);
+    }
+    printf("\n");
+}
+
+int main(int argc, char const *argv[])
+{
+    testeBubleSort();
     return 0;
 }
