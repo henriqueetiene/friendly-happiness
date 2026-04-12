@@ -15,7 +15,7 @@ int *geraVetor(int tamanho)
         exit(EXIT_FAILURE);
     }
 
-    for(int i = 0; i < 10; i++) {
+    for(int i = 0; i < tamanho; i++) {
         vetor[i] = rand() % tamanho;
     }
 
@@ -76,6 +76,24 @@ void testeSelectionSort(int *vetor, int tamanho)
     free(vetor);
 }
 
+void testeQuickSort(int *vetor, int tamanho)
+{
+    struct timespec inicio, fim;
+    double tempo_segundos;
+
+    printf("Algoritmo de ordenação Quick Sort\n");
+
+    printf("Ordenando vetor de %d posições\n", tamanho);
+    timespec_get(&inicio, TIME_UTC);
+    quickSort(vetor, 0, tamanho - 1);
+    timespec_get(&fim, TIME_UTC);
+
+    tempo_segundos = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
+    printf("Tempo de execução: %.10f segundos\n", tempo_segundos);
+
+    free(vetor);
+}
+
 void copiaVetor(int *vetorOriginal, int *novoVetor, int tamanho)
 {
     for (int i = 0; i < tamanho; i++)
@@ -109,6 +127,13 @@ int main(int argc, char const *argv[])
     int *vetorSelection = malloc(tamanho * sizeof(int));
     copiaVetor(vetor, vetorSelection, tamanho);
     testeSelectionSort(vetorSelection, tamanho);
+
+    printf("\n\n");
+
+    printf("Copiando vetor para ordenação Quick Sort\n");
+    int *vetorQuick = malloc(tamanho * sizeof(int));
+    copiaVetor(vetor, vetorQuick, tamanho);
+    testeQuickSort(vetorQuick, tamanho);
 
     free(vetor);
 
