@@ -3,20 +3,21 @@
 
 void bubleSort(int *v, int n)
 {
-    int continua, aux, fim = n;
+    int i, continua, aux, fim = n;
     do
     {
         continua = 0;
-        for (int i = 0; i < fim - 1; i++)
+        for (i = 0; i < fim - 1; i++)
         {
             if (v[i] > v[i + 1])
             {
                 aux = v[i];
                 v[i] = v[i + 1];
                 v[i + 1] = aux;
-                continua = i + 1;
+                continua = i;
             }
         }
+        fim--;
     } while (continua != 0);
 }
 
@@ -36,22 +37,22 @@ void insertionSort(int *v, int n)
 
 void selectionSort(int *v, int n)
 {
-    int minIndex, aux;
-    for (int i = 0; i < n - 1; i++)
+    int i, j, menor, troca;
+    for (i = 0; i < n - 1; i++)
     {
-        minIndex = i;
-        for (int j = i + 1; j < n; j++)
+        menor = i;
+        for (j = i + 1; j < n; j++)
         {
-            if (v[j] < v[minIndex])
+            if (v[j] < v[menor])
             {
-                minIndex = j;
+                menor = j;
             }
         }
-        if (i != minIndex)
+        if (i != menor)
         {
-            aux = v[minIndex];
-            v[minIndex] = v[i];
-            v[i] = aux;
+            troca = v[i];
+            v[i] = v[menor];
+            v[menor] = troca;
         }
     }
 }
