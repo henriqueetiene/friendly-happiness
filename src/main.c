@@ -3,9 +3,9 @@
 #include <time.h>
 #include "ordenacao.h"
 
-int *geraVetor(int n)
+int *geraVetor(int tamanho)
 {
-    int *vetor = malloc(n * sizeof(int));
+    int *vetor = malloc(tamanho * sizeof(int));
 
     srand(time(NULL));
 
@@ -16,88 +16,76 @@ int *geraVetor(int n)
     }
 
     for(int i = 0; i < 10; i++) {
-        vetor[i] = rand() % 100;
+        vetor[i] = rand() % tamanho;
     }
 
     return vetor;
 }
 
-void testeBubleSort(int n)
+void testeBubleSort(int *vetor, int tamanho)
 {
-    int *vetor = geraVetor(n);
-
     printf("Algoritmo de ordenação Buble Sort\n");
-    printf("Vetor desordenado\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", vetor[i]);
-    }
 
-    bubleSort(vetor, n);
-
-    printf("\nVetor ordenado\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", vetor[i]);
-    }
-    printf("\n");
+    printf("Ordenando vetor de %d posições\n", tamanho);
+    bubleSort(vetor, tamanho);
 
     free(vetor);
 }
 
-void testeInsertionSort(int n)
+void testeInsertionSort(int *vetor, int tamanho)
 {
-    int *vetor = geraVetor(n);
-
     printf("Algoritmo de ordenação Insertion Sort\n");
-    printf("Vetor desordenado\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", vetor[i]);
-    }
-
-    insertionSort(vetor, n);
-
-    printf("\nVetor ordenado\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", vetor[i]);
-    }
-    printf("\n");
     
+    printf("Ordenando vetor de %d posições\n", tamanho);
+    insertionSort(vetor, tamanho);
+
     free(vetor);
 }
 
-void testeSelectionSort(int n)
+void testeSelectionSort(int *vetor, int tamanho)
 {
-    int *vetor = geraVetor(n);
-
     printf("Algoritmo de ordenação Selection Sort\n");
-    printf("Vetor desordenado\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", vetor[i]);
-    }
 
-    selectionSort(vetor, n);
+    printf("Ordenando vetor de %d posições\n", tamanho);
+    selectionSort(vetor, tamanho);
 
-    printf("\nVetor ordenado\n");
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", vetor[i]);
-    }
-    printf("\n");
-    
     free(vetor);
+}
+
+void copiaVetor(int *vetorOriginal, int *novoVetor, int tamanho)
+{
+    for (int i = 0; i < tamanho; i++)
+    {
+        novoVetor[i] = vetorOriginal[i];
+    }
+    
 }
 
 int main(int argc, char const *argv[])
 {
-    testeBubleSort(10);
+    int tamanho = 100000;
+
+    printf("Gerando vetor de %d posições\n\n", tamanho);
+    int *vetor = geraVetor(tamanho);
+
+    printf("Copiando vetor para ordenação Buble Sort\n");
+    int *vetorBubble = malloc(tamanho * sizeof(int));
+    copiaVetor(vetor, vetorBubble, tamanho);
+    testeBubleSort(vetorBubble, tamanho);
+
     printf("\n\n");
-    testeInsertionSort(10);
+
+    printf("Copiando vetor para ordenação Insertion Sort\n");
+    int *vetorInsertion = malloc(tamanho * sizeof(int));
+    copiaVetor(vetor, vetorInsertion, tamanho);
+    testeInsertionSort(vetorInsertion, tamanho);
+
     printf("\n\n");
-    testeSelectionSort(10);
+
+    printf("Copiando vetor para ordenação Selection Sort\n");
+    int *vetorSelection = malloc(tamanho * sizeof(int));
+    copiaVetor(vetor, vetorSelection, tamanho);
+    testeSelectionSort(vetorSelection, tamanho);
 
     return 0;
 }
