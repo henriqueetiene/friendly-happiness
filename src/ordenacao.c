@@ -23,15 +23,15 @@ void bubleSort(int *v, int n)
 
 void insertionSort(int *v, int n)
 {
-    int aux, j;
-    for (int i = 1; i < n; i++)
+    int i, j, atual;
+    for (i = 1; i < n; i++)
     {
-        aux = v[i];
-        for (j = i; (j > 0) && (aux < v[j - 1]); j--)
+        atual = v[i];
+        for (j = i; (j > 0) && (atual < v[j - 1]); j--)
         {
             v[j] = v[j - 1];
         }
-        v[j] = aux;
+        v[j] = atual;
     }
 }
 
