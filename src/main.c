@@ -86,7 +86,7 @@ void copiaVetor(int *vetorOriginal, int *novoVetor, int tamanho)
 
 int main(int argc, char const *argv[])
 {
-    int tamanho = 500000;
+    int tamanho = 100000;
 
     printf("Gerando vetor de %d posições\n\n", tamanho);
     int *vetor = geraVetor(tamanho);
@@ -109,6 +109,8 @@ int main(int argc, char const *argv[])
     int *vetorSelection = malloc(tamanho * sizeof(int));
     copiaVetor(vetor, vetorSelection, tamanho);
     testeSelectionSort(vetorSelection, tamanho);
+
+    free(vetor);
 
     return 0;
 }
