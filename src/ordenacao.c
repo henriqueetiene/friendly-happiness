@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "ordenacao.h"
 
-void bubleSort(int *v, int n)
+void bubleSort(int *v, int n, long long *passos)
 {
     int i, continua, aux, fim = n;
     do
@@ -9,6 +9,7 @@ void bubleSort(int *v, int n)
         continua = 0;
         for (i = 0; i < fim - 1; i++)
         {
+            (*passos)++;
             if (v[i] > v[i + 1])
             {
                 aux = v[i];
@@ -21,7 +22,7 @@ void bubleSort(int *v, int n)
     } while (continua != 0);
 }
 
-void insertionSort(int *v, int n)
+void insertionSort(int *v, int n, long long *passos)
 {
     int i, j, atual;
     for (i = 1; i < n; i++)
@@ -29,13 +30,14 @@ void insertionSort(int *v, int n)
         atual = v[i];
         for (j = i; (j > 0) && (atual < v[j - 1]); j--)
         {
+            (*passos)++;
             v[j] = v[j - 1];
         }
         v[j] = atual;
     }
 }
 
-void selectionSort(int *v, int n)
+void selectionSort(int *v, int n, long long *passos)
 {
     int i, j, menor, troca;
     for (i = 0; i < n - 1; i++)
@@ -43,6 +45,7 @@ void selectionSort(int *v, int n)
         menor = i;
         for (j = i + 1; j < n; j++)
         {
+            (*passos)++;
             if (v[j] < v[menor])
             {
                 menor = j;
@@ -57,7 +60,7 @@ void selectionSort(int *v, int n)
     }
 }
 
-int particiona(int *v, int inicio, int final)
+int particiona(int *v, int inicio, int final, long long *passos)
 {
     int esq, dir, pivo, aux;
     
@@ -70,10 +73,12 @@ int particiona(int *v, int inicio, int final)
         while (esq <= final && v[esq] <= pivo)
         {
             esq++;
+            (*passos)++;
         }
         while (dir >= 0 && v[dir] > pivo)
         {
             dir--;
+            (*passos)++;
         }
         if (esq < dir)
         {
@@ -88,14 +93,12 @@ int particiona(int *v, int inicio, int final)
     return dir;
 }
 
-void quickSort(int *v, int inicio, int fim)
+void quickSort(int *v, int inicio, int fim, long long *passos)
 {
-    int pivo;
-
     if (fim > inicio)
     {
-        pivo = particiona(v, inicio, fim);
-        quickSort(v, inicio, pivo - 1);
-        quickSort(v, pivo + 1, fim);
+        int pivo = particiona(v, inicio, fim, passos);
+        quickSort(v, inicio, pivo - 1, passos);
+        quickSort(v, pivo + 1, fim, passos);
     }
 }
