@@ -121,9 +121,10 @@ void testeBuscaBinaria(int *vetor, int tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
+    long long passos = 0;
 
     timespec_get(&inicio, TIME_UTC);
-    int posicao = buscaBinaria(vetor, tamanho, elem);
+    int posicao = buscaBinaria(vetor, tamanho, elem, &passos);
     timespec_get(&fim, TIME_UTC);
 
     if (posicao != -1)
@@ -137,15 +138,18 @@ void testeBuscaBinaria(int *vetor, int tamanho, int elem)
 
     tempo_segundos = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
     printf("Tempo de execução: %.10f segundos\n", tempo_segundos);
+
+    printf("Numero de passos: %lld\n", passos);
 }
 
 void testeBuscaLinear(int *vetor, int tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
+    long long passos = 0;
 
     timespec_get(&inicio, TIME_UTC);
-    int posicao = buscaLinear(vetor, tamanho, elem);
+    int posicao = buscaLinear(vetor, tamanho, elem, &passos);
     timespec_get(&fim, TIME_UTC);
 
     if (posicao != -1)
@@ -159,15 +163,18 @@ void testeBuscaLinear(int *vetor, int tamanho, int elem)
 
     tempo_segundos = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
     printf("Tempo de execução: %.10f segundos\n", tempo_segundos);
+
+    printf("Numero de passos: %lld\n", passos);
 }
 
 void testeBuscaOrdenada(int *vetor, int tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
+    long long passos = 0;
 
     timespec_get(&inicio, TIME_UTC);
-    int posicao = buscaOrdenada(vetor, tamanho, elem);
+    int posicao = buscaOrdenada(vetor, tamanho, elem, &passos);
     timespec_get(&fim, TIME_UTC);
 
     if (posicao != -1)
@@ -181,6 +188,8 @@ void testeBuscaOrdenada(int *vetor, int tamanho, int elem)
 
     tempo_segundos = (fim.tv_sec - inicio.tv_sec) + (fim.tv_nsec - inicio.tv_nsec) / 1e9;
     printf("Tempo de execução: %.10f segundos\n", tempo_segundos);
+
+    printf("Numero de passos: %lld\n", passos);
 }
 
 int main(int argc, char const *argv[])
@@ -216,10 +225,10 @@ int main(int argc, char const *argv[])
     printf("----------Busca Binaria----------\n");
     int *vetorBuscaBinaria = copiaVetor(vetor, tamanho);
 
-    long long passos = 0;
+    long long passosQuickBinaria = 0;
 
     printf("Ordenando vetor de %d posições para busca\n\n", tamanho);
-    quickSort(vetorBuscaBinaria, 0, tamanho - 1, &passos);
+    quickSort(vetorBuscaBinaria, 0, tamanho - 1, &passosQuickBinaria);
 
     printf("Buscando elemento na posição v[0]\n");
     testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[0]);
@@ -253,10 +262,10 @@ int main(int argc, char const *argv[])
     printf("----------Busca Ordenada----------\n");
     int *vetorBuscaOrdenada = copiaVetor(vetor, tamanho);
 
-    passos = 0;
+    long long passosQuickOrdenada = 0;
 
     printf("Ordenando vetor de %d posições para busca\n\n", tamanho);
-    quickSort(vetorBuscaOrdenada, 0, tamanho - 1, &passos);
+    quickSort(vetorBuscaOrdenada, 0, tamanho - 1, &passosQuickOrdenada);
 
     printf("Buscando elemento na posição v[0]\n");
     testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[0]);

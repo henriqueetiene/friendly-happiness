@@ -1,6 +1,6 @@
 #include "busca.h"
 
-int buscaBinaria(int *v, int n, int elem)
+int buscaBinaria(int *v, int n, int elem, long long *passos)
 {
     int inicio, meio, final;
     
@@ -10,6 +10,7 @@ int buscaBinaria(int *v, int n, int elem)
     while (inicio <= final)
     {
         meio = (inicio + final) / 2;
+        (*passos)++;
         if (elem < v[meio])
         {
             final = meio - 1;
@@ -30,11 +31,12 @@ int buscaBinaria(int *v, int n, int elem)
     return -1;
 }
 
-int buscaLinear(int *v, int n, int elem)
+int buscaLinear(int *v, int n, int elem, long long *passos)
 {
     int i;
     for (i = 0; i < n; i++)
     {
+        (*passos)++;
         if (elem == v[i])
         {
             return i;
@@ -44,11 +46,12 @@ int buscaLinear(int *v, int n, int elem)
     return -1;
 }
 
-int buscaOrdenada(int *v, int n, int elem)
+int buscaOrdenada(int *v, int n, int elem, long long *passos)
 {
     int i;
     for (i = 0; i < n; i++)
     {
+        (*passos)++;
         if (elem == v[i])
         {
             return i;
