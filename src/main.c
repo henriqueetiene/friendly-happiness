@@ -22,6 +22,24 @@ int *geraVetor(int tamanho)
     return vetor;
 }
 
+int *copiaVetor(int *vetorOriginal, int tamanho)
+{
+    int *novoVetor = malloc(tamanho * sizeof(int));
+
+    if (novoVetor == NULL)
+    {
+        printf("Erro na alocação de memoria para o vetor de copia.\n");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        novoVetor[i] = vetorOriginal[i];
+    }
+
+    return novoVetor;
+}
+
 void testeBubleSort(int *vetor, int tamanho)
 {
     struct timespec inicio, fim;
@@ -98,14 +116,6 @@ void testeQuickSort(int *vetor, int tamanho)
     free(vetor);
 }
 
-void copiaVetor(int *vetorOriginal, int *novoVetor, int tamanho)
-{
-    for (int i = 0; i < tamanho; i++)
-    {
-        novoVetor[i] = vetorOriginal[i];
-    }
-}
-
 int main(int argc, char const *argv[])
 {
     int tamanho = 100000;
@@ -113,29 +123,25 @@ int main(int argc, char const *argv[])
     int *vetor = geraVetor(tamanho);
 
     printf("----------Buble Sort----------\n");
-    int *vetorBubble = malloc(tamanho * sizeof(int));
-    copiaVetor(vetor, vetorBubble, tamanho);
+    int *vetorBubble = copiaVetor(vetor, tamanho);
     testeBubleSort(vetorBubble, tamanho);
 
     printf("\n\n");
 
     printf("----------Insertion Sort----------\n");
-    int *vetorInsertion = malloc(tamanho * sizeof(int));
-    copiaVetor(vetor, vetorInsertion, tamanho);
+    int *vetorInsertion = copiaVetor(vetor, tamanho);
     testeInsertionSort(vetorInsertion, tamanho);
 
     printf("\n\n");
 
     printf("----------Selection Sort----------\n");
-    int *vetorSelection = malloc(tamanho * sizeof(int));
-    copiaVetor(vetor, vetorSelection, tamanho);
+    int *vetorSelection = copiaVetor(vetor, tamanho);
     testeSelectionSort(vetorSelection, tamanho);
 
     printf("\n\n");
 
     printf("----------Quick Sort----------\n");
-    int *vetorQuick = malloc(tamanho * sizeof(int));
-    copiaVetor(vetor, vetorQuick, tamanho);
+    int *vetorQuick = copiaVetor(vetor, tamanho);
     testeQuickSort(vetorQuick, tamanho);
 
     free(vetor);
