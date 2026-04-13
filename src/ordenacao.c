@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "ordenacao.h"
 
 void bubleSort(int *v, int n, long long *passos)
