@@ -1,6 +1,6 @@
 #include "ordenacao.h"
 
-void bubleSort(int *v, int n, long long *passos)
+void bubleSort(int *v, long n, long long *passos)
 {
     int i, continua, aux, fim = n;
     do
@@ -21,7 +21,7 @@ void bubleSort(int *v, int n, long long *passos)
     } while (continua != 0);
 }
 
-void insertionSort(int *v, int n, long long *passos)
+void insertionSort(int *v, long n, long long *passos)
 {
     int i, j, atual;
     for (i = 1; i < n; i++)
@@ -36,7 +36,7 @@ void insertionSort(int *v, int n, long long *passos)
     }
 }
 
-void selectionSort(int *v, int n, long long *passos)
+void selectionSort(int *v, long n, long long *passos)
 {
     int i, j, menor, troca;
     for (i = 0; i < n - 1; i++)
@@ -59,7 +59,7 @@ void selectionSort(int *v, int n, long long *passos)
     }
 }
 
-int particiona(int *v, int inicio, int final, long long *passos)
+int particiona(int *v, int inicio, long final, long long *passos)
 {
     int esq, dir, pivo, aux;
     
@@ -92,7 +92,7 @@ int particiona(int *v, int inicio, int final, long long *passos)
     return dir;
 }
 
-void quickSort(int *v, int inicio, int fim, long long *passos)
+void quickSort(int *v, int inicio, long fim, long long *passos)
 {
     if (fim > inicio)
     {
