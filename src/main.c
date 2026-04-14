@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #include "ordenacao.h"
 #include "busca.h"
 
-int *geraVetor(int tamanho)
+int *geraVetor(long tamanho)
 {
     int *vetor = malloc(tamanho * sizeof(int));
 
@@ -23,7 +24,7 @@ int *geraVetor(int tamanho)
     return vetor;
 }
 
-int *copiaVetor(int *vetorOriginal, int tamanho)
+int *copiaVetor(int *vetorOriginal, long tamanho)
 {
     int *novoVetor = malloc(tamanho * sizeof(int));
 
@@ -41,13 +42,13 @@ int *copiaVetor(int *vetorOriginal, int tamanho)
     return novoVetor;
 }
 
-void testeBubleSort(int *vetor, int tamanho)
+void testeBubleSort(int *vetor, long tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
 
-    printf("Ordenando vetor de %d posições\n", tamanho);
+    printf("Ordenando vetor de %ld posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     bubleSort(vetor, tamanho, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -60,13 +61,13 @@ void testeBubleSort(int *vetor, int tamanho)
     free(vetor);
 }
 
-void testeInsertionSort(int *vetor, int tamanho)
+void testeInsertionSort(int *vetor, long tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
     
-    printf("Ordenando vetor de %d posições\n", tamanho);
+    printf("Ordenando vetor de %ld posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     insertionSort(vetor, tamanho, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -79,13 +80,13 @@ void testeInsertionSort(int *vetor, int tamanho)
     free(vetor);
 }
 
-void testeSelectionSort(int *vetor, int tamanho)
+void testeSelectionSort(int *vetor, long tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
 
-    printf("Ordenando vetor de %d posições\n", tamanho);
+    printf("Ordenando vetor de %ld posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     selectionSort(vetor, tamanho, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -98,13 +99,13 @@ void testeSelectionSort(int *vetor, int tamanho)
     free(vetor);
 }
 
-void testeQuickSort(int *vetor, int tamanho)
+void testeQuickSort(int *vetor, long tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
 
-    printf("Ordenando vetor de %d posições\n", tamanho);
+    printf("Ordenando vetor de %ld posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     quickSort(vetor, 0, tamanho - 1, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -117,7 +118,7 @@ void testeQuickSort(int *vetor, int tamanho)
     free(vetor);
 }
 
-void testeBuscaBinaria(int *vetor, int tamanho, int elem)
+void testeBuscaBinaria(int *vetor, long tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
@@ -142,7 +143,7 @@ void testeBuscaBinaria(int *vetor, int tamanho, int elem)
     printf("Numero de passos: %lld\n", passos);
 }
 
-void testeBuscaLinear(int *vetor, int tamanho, int elem)
+void testeBuscaLinear(int *vetor, long tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
@@ -167,7 +168,7 @@ void testeBuscaLinear(int *vetor, int tamanho, int elem)
     printf("Numero de passos: %lld\n", passos);
 }
 
-void testeBuscaOrdenada(int *vetor, int tamanho, int elem)
+void testeBuscaOrdenada(int *vetor, long tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
@@ -194,89 +195,122 @@ void testeBuscaOrdenada(int *vetor, int tamanho, int elem)
 
 int main(int argc, char const *argv[])
 {
-    int tamanho = 100000;
+    if (argc != 3)
+    {
+        printf("Erro: Quantidade de argumentos invalido\n");
+        return 1;
+    }
+
+    char *str = (char *)argv[2];
+    char *end;
+    long tamanho = strtol(str, &end, 10);
+
+    if (str == end) {
+        printf("Erro: informe um numero válido para o tamanho do vetor\n");
+    }
 
     int *vetor = geraVetor(tamanho);
 
-    printf("----------Buble Sort----------\n");
-    int *vetorBubble = copiaVetor(vetor, tamanho);
-    testeBubleSort(vetorBubble, tamanho);
+    if (strcmp(argv[1], "buble") == 0)
+    {
+        printf("----------Buble Sort----------\n");
+        int *vetorBubble = copiaVetor(vetor, tamanho);
+        testeBubleSort(vetorBubble, tamanho);
 
-    printf("\n\n");
+        printf("\n\n");
+    }
+    else if (strcmp(argv[1], "insertion") == 0)
+    {
+        printf("----------Insertion Sort----------\n");
+        int *vetorInsertion = copiaVetor(vetor, tamanho);
+        testeInsertionSort(vetorInsertion, tamanho);
 
-    printf("----------Insertion Sort----------\n");
-    int *vetorInsertion = copiaVetor(vetor, tamanho);
-    testeInsertionSort(vetorInsertion, tamanho);
+        printf("\n\n");
+    }
+    else if (strcmp(argv[1], "selection") == 0)
+    {
+        printf("----------Selection Sort----------\n");
+        int *vetorSelection = copiaVetor(vetor, tamanho);
+        testeSelectionSort(vetorSelection, tamanho);
 
-    printf("\n\n");
+        printf("\n\n");
+    }
+    else if (strcmp(argv[1], "quick") == 0)
+    {
+        printf("----------Quick Sort----------\n");
+        int *vetorQuick = copiaVetor(vetor, tamanho);
+        testeQuickSort(vetorQuick, tamanho);
 
-    printf("----------Selection Sort----------\n");
-    int *vetorSelection = copiaVetor(vetor, tamanho);
-    testeSelectionSort(vetorSelection, tamanho);
+        printf("\n\n");
+    }
+    else if (strcmp(argv[1], "buscabinaria") == 0)
+    {
+        printf("----------Busca Binaria----------\n");
+        int *vetorBuscaBinaria = copiaVetor(vetor, tamanho);
 
-    printf("\n\n");
+        long long passosQuickBinaria = 0;
 
-    printf("----------Quick Sort----------\n");
-    int *vetorQuick = copiaVetor(vetor, tamanho);
-    testeQuickSort(vetorQuick, tamanho);
+        printf("Ordenando vetor de %ld posições para busca\n\n", tamanho);
+        quickSort(vetorBuscaBinaria, 0, tamanho - 1, &passosQuickBinaria);
 
-    printf("\n\n");
+        printf("Buscando elemento na posição v[0]\n");
+        testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[0]);
+        printf("\nBuscando elemento na posição v[n - 1]\n");
+        testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[tamanho - 1]);
+        printf("\nBuscando elemento na posição v[n / 2]\n");
+        testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[tamanho / 2]);
+        printf("\nBuscando elemento na posição v[n / 3]\n");
+        testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[tamanho / 3]);
 
-    printf("----------Busca Binaria----------\n");
-    int *vetorBuscaBinaria = copiaVetor(vetor, tamanho);
+        free(vetorBuscaBinaria);
 
-    long long passosQuickBinaria = 0;
+        printf("\n\n");
+    }
+    else if (strcmp(argv[1], "buscalinear") == 0)
+    {
+        printf("----------Busca Linear----------\n");
+        int *vetorBuscaLinear = copiaVetor(vetor, tamanho);
 
-    printf("Ordenando vetor de %d posições para busca\n\n", tamanho);
-    quickSort(vetorBuscaBinaria, 0, tamanho - 1, &passosQuickBinaria);
+        printf("Buscando elemento na posição v[0]\n");
+        testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[0]);
+        printf("\nBuscando elemento na posição v[n - 1]\n");
+        testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[tamanho - 1]);
+        printf("\nBuscando elemento na posição v[n / 2]\n");
+        testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[tamanho / 2]);
+        printf("\nBuscando elemento na posição v[n / 3]\n");
+        testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[tamanho / 3]);
 
-    printf("Buscando elemento na posição v[0]\n");
-    testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[0]);
-    printf("\nBuscando elemento na posição v[n - 1]\n");
-    testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[tamanho - 1]);
-    printf("\nBuscando elemento na posição v[n / 2]\n");
-    testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[tamanho / 2]);
-    printf("\nBuscando elemento na posição v[n / 3]\n");
-    testeBuscaBinaria(vetorBuscaBinaria, tamanho, vetorBuscaBinaria[tamanho / 3]);
+        free(vetorBuscaLinear);
 
-    free(vetorBuscaBinaria);
+        printf("\n\n");
+    }
+    else if (strcmp(argv[1], "buscaordenada") == 0)
+    {
+        printf("----------Busca Ordenada----------\n");
+        int *vetorBuscaOrdenada = copiaVetor(vetor, tamanho);
 
-    printf("\n\n");
+        long long passosQuickOrdenada = 0;
 
-    printf("----------Busca Linear----------\n");
-    int *vetorBuscaLinear = copiaVetor(vetor, tamanho);
+        printf("Ordenando vetor de %ld posições para busca\n\n", tamanho);
+        quickSort(vetorBuscaOrdenada, 0, tamanho - 1, &passosQuickOrdenada);
 
-    printf("Buscando elemento na posição v[0]\n");
-    testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[0]);
-    printf("\nBuscando elemento na posição v[n - 1]\n");
-    testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[tamanho - 1]);
-    printf("\nBuscando elemento na posição v[n / 2]\n");
-    testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[tamanho / 2]);
-    printf("\nBuscando elemento na posição v[n / 3]\n");
-    testeBuscaLinear(vetorBuscaLinear, tamanho, vetorBuscaLinear[tamanho / 3]);
+        printf("Buscando elemento na posição v[0]\n");
+        testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[0]);
+        printf("\nBuscando elemento na posição v[n - 1]\n");
+        testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[tamanho - 1]);
+        printf("\nBuscando elemento na posição v[n / 2]\n");
+        testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[tamanho / 2]);
+        printf("\nBuscando elemento na posição v[n / 3]\n");
+        testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[tamanho / 3]);
 
-    free(vetorBuscaLinear);
-
-    printf("\n\n");
-
-    printf("----------Busca Ordenada----------\n");
-    int *vetorBuscaOrdenada = copiaVetor(vetor, tamanho);
-
-    long long passosQuickOrdenada = 0;
-
-    printf("Ordenando vetor de %d posições para busca\n\n", tamanho);
-    quickSort(vetorBuscaOrdenada, 0, tamanho - 1, &passosQuickOrdenada);
-
-    printf("Buscando elemento na posição v[0]\n");
-    testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[0]);
-    printf("\nBuscando elemento na posição v[n - 1]\n");
-    testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[tamanho - 1]);
-    printf("\nBuscando elemento na posição v[n / 2]\n");
-    testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[tamanho / 2]);
-    printf("\nBuscando elemento na posição v[n / 3]\n");
-    testeBuscaOrdenada(vetorBuscaOrdenada, tamanho, vetorBuscaOrdenada[tamanho / 3]);
-
-    free(vetorBuscaOrdenada);
+        free(vetorBuscaOrdenada);
+    }
+    else
+    {
+        printf("Erro: nenhum algoritmo encontrado\n");
+        free(vetor);
+        return 1;
+    }
 
     free(vetor);
 
