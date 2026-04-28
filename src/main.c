@@ -5,7 +5,7 @@
 #include "ordenacao.h"
 #include "busca.h"
 
-int *geraVetor(long tamanho)
+int *geraVetor(int tamanho)
 {
     int *vetor = malloc(tamanho * sizeof(int));
 
@@ -24,7 +24,7 @@ int *geraVetor(long tamanho)
     return vetor;
 }
 
-int *copiaVetor(int *vetorOriginal, long tamanho)
+int *copiaVetor(int *vetorOriginal, int tamanho)
 {
     int *novoVetor = malloc(tamanho * sizeof(int));
 
@@ -42,13 +42,13 @@ int *copiaVetor(int *vetorOriginal, long tamanho)
     return novoVetor;
 }
 
-void testeBubleSort(int *vetor, long tamanho)
+void testeBubleSort(int *vetor, int tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
 
-    printf("Ordenando vetor de %ld posições\n", tamanho);
+    printf("Ordenando vetor de %d posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     bubleSort(vetor, tamanho, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -61,13 +61,13 @@ void testeBubleSort(int *vetor, long tamanho)
     free(vetor);
 }
 
-void testeInsertionSort(int *vetor, long tamanho)
+void testeInsertionSort(int *vetor, int tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
     
-    printf("Ordenando vetor de %ld posições\n", tamanho);
+    printf("Ordenando vetor de %d posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     insertionSort(vetor, tamanho, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -80,13 +80,13 @@ void testeInsertionSort(int *vetor, long tamanho)
     free(vetor);
 }
 
-void testeSelectionSort(int *vetor, long tamanho)
+void testeSelectionSort(int *vetor, int tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
 
-    printf("Ordenando vetor de %ld posições\n", tamanho);
+    printf("Ordenando vetor de %d posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     selectionSort(vetor, tamanho, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -99,13 +99,13 @@ void testeSelectionSort(int *vetor, long tamanho)
     free(vetor);
 }
 
-void testeQuickSort(int *vetor, long tamanho)
+void testeQuickSort(int *vetor, int tamanho)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
     long long passos = 0;
 
-    printf("Ordenando vetor de %ld posições\n", tamanho);
+    printf("Ordenando vetor de %d posições\n", tamanho);
     timespec_get(&inicio, TIME_UTC);
     quickSort(vetor, 0, tamanho - 1, &passos);
     timespec_get(&fim, TIME_UTC);
@@ -118,7 +118,7 @@ void testeQuickSort(int *vetor, long tamanho)
     free(vetor);
 }
 
-void testeBuscaBinaria(int *vetor, long tamanho, int elem)
+void testeBuscaBinaria(int *vetor, int tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
@@ -143,7 +143,7 @@ void testeBuscaBinaria(int *vetor, long tamanho, int elem)
     printf("Numero de passos: %lld\n", passos);
 }
 
-void testeBuscaLinear(int *vetor, long tamanho, int elem)
+void testeBuscaLinear(int *vetor, int tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
@@ -168,7 +168,7 @@ void testeBuscaLinear(int *vetor, long tamanho, int elem)
     printf("Numero de passos: %lld\n", passos);
 }
 
-void testeBuscaOrdenada(int *vetor, long tamanho, int elem)
+void testeBuscaOrdenada(int *vetor, int tamanho, int elem)
 {
     struct timespec inicio, fim;
     double tempo_segundos;
@@ -228,7 +228,7 @@ int main(int argc, char const *argv[])
 
     long long passosQuickBinaria = 0;
 
-    printf("Ordenando vetor de %ld posições para busca\n\n", tamanho);
+    printf("Ordenando vetor de %d posições para busca\n\n", tamanho);
     quickSort(vetorBuscaBinaria, 0, tamanho - 1, &passosQuickBinaria);
 
     printf("Buscando elemento na posição v[0]\n");
@@ -265,7 +265,7 @@ int main(int argc, char const *argv[])
 
     long long passosQuickOrdenada = 0;
 
-    printf("Ordenando vetor de %ld posições para busca\n\n", tamanho);
+    printf("Ordenando vetor de %d posições para busca\n\n", tamanho);
     quickSort(vetorBuscaOrdenada, 0, tamanho - 1, &passosQuickOrdenada);
 
     printf("Buscando elemento na posição v[0]\n");
