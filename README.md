@@ -1,6 +1,6 @@
 # Algoritmos de Ordenação em C
 
-Este repositório contém implementações de diversos algoritmos de ordenação utilizando a linguagem C. O objetivo é estudar estruturas de dados, análise de complexidade e comparar o desempenho entre diferentes abordagens.
+Este repositório contém implementações de diversos algoritmos de ordenação e busca utilizando a linguagem C. O objetivo é estudar estruturas de dados, análise de complexidade e comparar o desempenho entre diferentes abordagens.
 
 ---
 
@@ -9,6 +9,11 @@ Este repositório contém implementações de diversos algoritmos de ordenação
 * Bubble Sort
 * Selection Sort
 * Insertion Sort
+* Merge Sort
+* Quick Sort
+* Busca Binária
+* Busca Linear
+* Busca Sequencial Ordenada
 
 ---
 
@@ -35,13 +40,25 @@ make
 
 ---
 
-## Complexidade dos algoritmos
+## Complexidade dos algoritmos de ordenação
 
 | Algoritmo      | Melhor Caso | Caso Médio | Pior Caso  |
 | -------------- | ----------- | ---------- | ---------- |
 | Bubble Sort    | O(n)        | O(n²)      | O(n²)      |
 | Selection Sort | O(n²)       | O(n²)      | O(n²)      |
 | Insertion Sort | O(n)        | O(n²)      | O(n²)      |
+| Merge Sort     | O(n log n)  | O(n log n) | O(n log n) |
+| Quick Sort     | O(n log n)  | O(n log n) | O(n²)      |
+
+---
+
+## Complexidade dos algoritmos de busca
+
+| Algoritmo                 | Melhor Caso | Caso Médio | Pior Caso  |
+| ------------------------- | ----------- | ---------- | ---------- |
+| Busca Binária             | O(1)        | O(log n)   | O(log n)   |
+| Busca Linear              | O(1)        | O(n)       | O(n)       |
+| Busca Sequencial Ordenada | O(1)        | O(n)       | O(n)       |
 
 ---
 
