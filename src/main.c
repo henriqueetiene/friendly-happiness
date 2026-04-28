@@ -193,7 +193,7 @@ void testeBuscaOrdenada(int *vetor, int tamanho, int elem)
     printf("Numero de passos: %lld\n", passos);
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
     int tamanho = 100000;
 
