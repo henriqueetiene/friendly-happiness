@@ -217,8 +217,6 @@ int main(int argc, char const *argv[])
         int *vetorBubble = copiaVetor(vetor, tamanho);
         testeBubleSort(vetorBubble, tamanho);
 
-        free(vetorBubble);
-
         printf("\n\n");
     }
     else if (strcmp(argv[1], "insertion") == 0)
@@ -226,8 +224,6 @@ int main(int argc, char const *argv[])
         printf("----------Insertion Sort----------\n");
         int *vetorInsertion = copiaVetor(vetor, tamanho);
         testeInsertionSort(vetorInsertion, tamanho);
-
-        free(vetorInsertion);
 
         printf("\n\n");
     }
@@ -237,8 +233,6 @@ int main(int argc, char const *argv[])
         int *vetorSelection = copiaVetor(vetor, tamanho);
         testeSelectionSort(vetorSelection, tamanho);
 
-        free(vetorSelection);
-
         printf("\n\n");
     }
     else if (strcmp(argv[1], "quick") == 0)
@@ -246,8 +240,6 @@ int main(int argc, char const *argv[])
         printf("----------Quick Sort----------\n");
         int *vetorQuick = copiaVetor(vetor, tamanho);
         testeQuickSort(vetorQuick, tamanho);
-
-        free(vetorQuick);
 
         printf("\n\n");
     }
