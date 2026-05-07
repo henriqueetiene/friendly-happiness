@@ -38,6 +38,24 @@ make
 ./build/programa
 ```
 
+### Limpar:
+
+```bash
+make clean
+```
+
+### Compila e Executa:
+
+```bash
+make run
+```
+
+### Compila para Debug:
+
+```bash
+make debug
+```
+
 ---
 
 ## Complexidade dos algoritmos de ordenação
